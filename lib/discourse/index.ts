@@ -2,10 +2,14 @@ const API_KEY = "";
 const API_USERNAME = "";
 const BASE_URL = "https://forum.test.viasat.com";
 
-/**
- * @param {{title:string;raw:string,category:number}}} param0
- */
-export function createNewTopic({ title, raw, category }) {
+interface NewTopic {
+  title: string;
+  raw: string;
+  category: number;
+  created_at?: string;
+}
+
+export function createNewTopic({ title, raw, category }: NewTopic) {
   fetch(`${BASE_URL}/posts.json`, {
     headers: {
       "Content-Type": "application/json",
