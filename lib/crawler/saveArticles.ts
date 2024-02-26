@@ -1,9 +1,8 @@
 import puppeteer from "puppeteer";
 
-// const baseUrl = "https://help.viasat.com";
-
 export async function saveArticles(categoryName: string, categoryLink: string) {
-  const browser = await puppeteer.launch();
+  console.log({ categoryName, categoryLink });
+  const browser = await puppeteer.launch({ headless: false, timeout: 0 });
   const page = await browser.newPage();
   await page.goto(categoryLink);
 
@@ -18,6 +17,16 @@ export async function saveArticles(categoryName: string, categoryLink: string) {
   });
 
   if (articleList === null) return;
+
+  const articleLinks = [];
+  for (let i = 0; i < articleList.children.length; i++) {
+    const articleLink = await page.evaluate(() => {
+      return document.querySelector<HTMLAnchorElement>("a.article-link")?.href;
+    });
+    articleLinks.push(articleLink);
+  }
+
+  console.log(articleLinks);
 
   await browser.close();
 }
