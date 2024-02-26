@@ -1,5 +1,5 @@
 node_modules
 .cache
 dist
-erros
+err
 .env

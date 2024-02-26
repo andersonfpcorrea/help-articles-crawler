@@ -14,7 +14,7 @@ export function htmlToMd(doc: string | undefined) {
   } catch (err) {
     const error = err as Error;
     writeFileSync(
-      `./errors/${Date.now()}.txt`,
+      `./err/${Date.now()}.txt`,
       error.stack + "\n" + error.message + "\n" + doc
     );
     return null;
