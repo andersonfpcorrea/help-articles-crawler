@@ -132,7 +132,6 @@ async function main() {
             return;
           }
 
-          console.log(`Created ${++count} new topics`);
           await createNewTopic({
             title: file.replace(/\-/g, " ").replace(".md", ""),
             raw: content,
